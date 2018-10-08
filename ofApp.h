@@ -19,6 +19,8 @@ public:
 
 	ofParameter<bool> drawGrid;
 	ofParameter<bool> useLight;
+	ofParameter<bool> doRotate;
+
 	bool drawGui = true;
 
 	ofLight light;
@@ -41,7 +43,7 @@ private:
 	int radius;
 
 
-
+	//bool doRotate;
 
 
 	ofColor color;
@@ -54,11 +56,7 @@ private:
 
 	void analogPinChanged(const int& pinNum);
 
-
 	float rotateX;
     float rotateY;
     float rotateZ;
-
-    bool doRotate;
-	bool drawGrid2;
 };
