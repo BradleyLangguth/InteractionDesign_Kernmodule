@@ -1,0 +1,63 @@
+Mijn project is uiteindelijk een box geworden met daar in een nep hart.
+
+Als je op de druk sensor drukt gaat er in een doosje een nep hart kloppen met belichting die op de snelheid van het hart aan en uit gaat.
+
+Dit zijn de onderdelen die ik heb gebruikt voor mijn project:
+
+- 	Druk sensor (Ik heb gekozen voor een druk sensor omdat in het final ontwerp je de hartslag triggert door de Flamingo te knuffelen)
+- 	9v battery pack
+- 	Meerdere Ledjes 
+-	mp3 Module
+-	Speakertje (Expres een beetje een grote omdat ik wat bass/trillingen wou voelen)
+
+Ik ben begonnen met het aansluiten van meerdere ledjes. Na enige tijd zoeken heb ik een stukje code gevonden
+van iemand anders op het internet (ik heb er meerdere uitgeprobeert maar deze had de meeste mogelijkheden
+en het was gebasseert op echte hartkloppingen). Dit stukje code geeft mij de mogelijkheid om de lampjes op 3 verschillende 
+snelheden te laten kloppen. Uiteindelijk heb ik gekozen voor de meest langzame sequence. De andere waren meer realistisch,
+alleen die gaven mij als persoon geen rustig gevoel. Het implementeren van deze functie ging nog vrij makkelijk.
+
+Daarna ben ik gaan proberen om het speakertje aan de praat te krijgen. Dit ging ook vrij makkelijk omdat ik nog 
+niet probeerde om mp3 bestandjes af te spelen, dat was de volgende stap. 
+
+Ik heb moeite gehad met het aansluiten van de mp3 module. Ten eerste omdat het niet duidelijk was of ik de juiste
+documenatie gebruikte (https://dlnmh9ip6v2uc.cloudfront.net/datasheets/Widgets/WTV020SD.pdf). Ook ben ik nog niet
+bekend met het uitlezen van schema's dus dit was vrij nieuw voor mij.
+
+Het leek mij slim om eerst sample geluidjes te gebruiken. Omdat als ik mijn eigen sound files zou gebruiken en de
+module niet zou werken zou ik niet kunnen weten of het aan de module lag of aan de audio files. 
+
+Aangezien het formaat van de audio bestandjes AD4 was, had ik ook geen mogelijk om de bestandjes voor af teluisteren.
+
+Na uren bezig zijn geweest met het aansluiten van de module kwam er uit eindelijk kijhard Oppa gangnam style uit de 
+speaker dus het werkte gelukkig (zelfs nadat ik een mp3 module pin had verbogen tijdens het omwisselen van mijn breadboard). 
+
+De volgende stap was het importeren van mijn eigen audio file. Ik had een mp3 gevonden van een hartslag die ongeveer een uur
+duurde. Deze heb ik vervolgens met audacity geknipt naar 10 sec. Ik had ook 1 hartslag kunnen gebruiken als audiofile alleen
+ik zag en hoorde dat sommige hartslagen verschillend klonken wat een meer realistisch beeld gaven van een echt kloppent hart.
+In eerste instantie lukte het mij niet om mp3 naar AD4 te converteren (wat wel nodig was voor de module).
+ 
+Dus toen ben ik over gestapt naar het converten van een mp3 naar een WAV file. Waar ik vervolgens achter kwam was
+dat WAV files het ook niet zomaar doen. Na het kiezen van de juiste methode voor het converteren van mijn mp3 bestandje naar 
+een WAV file, klonk de audio zo slecht dat het niet meer bruikbaar was. Uiteindelijk ben ik zelfs gaan proberen om
+de ruis via Audacity weg te werken, wat geen nut had want na het opslaan kwam de ruis weer terug. Uiteindelijk ben ik toen 
+maar weer gaan proberen om AD4 te gebruiken en dit lukte. 
+
+Oke dus nu kon ik via code de speaker een audio file laten afspelen (kloppend hart) en de lampjes laten faden als een hartslag.
+Ik dacht dat ik klaar was, mijn plan was om 2 functies (PlaySong & Heartbeat) telaten afspelen als je op de druksensor zou 
+drukken. 
+
+Erg dom maar een arduino kan natuurlijk maar 1 functie tegelijk. Ik ben toen naar manieren gaan zoeken om 2 functies op hetzelfde
+moment af te laten spelen. Ik ben toen uitgekomen bij de metro library wat eigenlijk een dead end was. Ik dacht dat het misschien
+mogelijk was om de functies om de zoveel seconden te laten switchen. Inprinciepe lukte dit op een gegeven moment wel alleen zorgde
+dit er voor dat de audio heel slecht klonk en de Ledjes 2 keer zo langzaam gingen waardoor ze gingen knipperen.
+
+Na wat hulp kwam ik erachter dat ik de busypin en de async functie moest gebruiken. Ook heb ik het hele project lang geprobeert delays 
+te vermijden omdat ik onder andere las dat dit niet samen werkt met de metro library. Achteraf werkt mijn script veel beter als ik 
+er een paar delays tussen zet.
+
+Als laatste probleempje die ik tegenkwam was dat ik een timer had geschreven die na 10seconde de functie stopzet. Jammer genoeg stopte
+de audio wel op tijd maar de led sequence niet. Ik heb toen een stukje code aan mijn while functie toegevoegd wat er eigenlijk voor 
+zorgt dat de lampjes op hetzelfde moment stoppen als de audio.
+
+(Ook heb ik zelf de tijd van de lampjes, en de audio op elkaar afgestemt.)
+
